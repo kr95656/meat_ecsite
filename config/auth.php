@@ -1,4 +1,4 @@
-ss<?php
+<?php
 
 return [
 
