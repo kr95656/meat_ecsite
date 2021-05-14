@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -30,6 +31,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = ('/staff'); // 新規登録後の遷移先はここで変更
 
     /**
      * Create a new controller instance.
@@ -53,6 +55,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'tel' => ['required', 'string', 'min:8', 'confirmed'],
+            'prefecture' => ['required', 'string', 'min:8', 'confirmed'],
+            'city' => ['required', 'string', 'min:8', 'confirmed'],
+            'street' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -60,13 +66,17 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Customer::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'tel' => $data['tel'],
+            'prefecture' => $data['prefecture'],
+            'city' => $data['city'],
+            'street' => $data['street'],
             'password' => Hash::make($data['password']),
         ]);
     }
