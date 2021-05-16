@@ -43,6 +43,46 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="tel">tel</label>
+                    <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror" name="tel" required autocomplete="tel" placeholder="tel" value="{{ old('tel') }}">
+                    @error('tel')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="prefecture">prefecture</label>
+                    <input id="prefecture" type="prefecture" class="form-control @error('prefecture') is-invalid @enderror" name="prefecture" required autocomplete="prefecture" placeholder="prefecture" value="{{ old('prefecture') }}">
+                    @error('prefecture')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="city">city</label>
+                    <input id="city" type="city" class="form-control @error('city') is-invalid @enderror" name="city" required autocomplete="city" placeholder="city" value="{{ old('city') }}">
+                    @error('city')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="street">street</label>
+                    <input id="street" type="street" class="form-control @error('street') is-invalid @enderror" name="street" required autocomplete="street" placeholder="street" value="{{ old('street') }}">
+                    @error('street')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <button type="submit" class="btn btn-block btn-secondary">
                         会員登録
                     </button>

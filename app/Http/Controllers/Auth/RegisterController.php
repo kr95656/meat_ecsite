@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Customer;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
 
 class RegisterController extends Controller
 {
@@ -31,7 +33,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-    // protected $redirectTo = ('/staff'); // 新規登録後の遷移先はここで変更
+    // protected $redirectTo = ('/top'); // 新規登録後の遷移先はここで変更
 
     /**
      * Create a new controller instance.
@@ -53,12 +55,13 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'tel' => ['required', 'string', 'min:8', 'confirmed'],
-            'prefecture' => ['required', 'string', 'min:8', 'confirmed'],
-            'city' => ['required', 'string', 'min:8', 'confirmed'],
-            'street' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'], //usersから変更
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:customers'], //userから変更
+            'password' => ['required', 'string'],
+            'tel' => ['required', 'string'],
+            'prefecture' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'street' => ['required', 'string'],
         ]);
     }
 
@@ -66,7 +69,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\User
+     * @return \App\Models\Customer
      */
     protected function create(array $data)
     {
