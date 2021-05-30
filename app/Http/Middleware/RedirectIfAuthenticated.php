@@ -18,8 +18,21 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
+        // デフォルト
+        // if (Auth::guard($guard)->check()) {
+        //     return redirect(RouteServiceProvider::HOME);
+        // }
+
+        // return $next($request);
+
+
+        // マルチ認証 guardがuserかadminかで分岐させるよう変更
+        if (Auth::guard($guard)->check() && $guard === 'customers') {
             return redirect(RouteServiceProvider::HOME);
+
+        } elseif (Auth::guard($guard)->check() && $guard === 'employees') {
+            return redirect(RouteServiceProvider::EMPLOYEE_HOME);
+
         }
 
         return $next($request);

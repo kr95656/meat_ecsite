@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
@@ -15,7 +16,12 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+            // employeeからのRouteの分岐を追加
+            if (Route::is('employee.*')) {
+                return route('employee.login');
+            } else {
+                return route('login');
+            }
         }
     }
 }
